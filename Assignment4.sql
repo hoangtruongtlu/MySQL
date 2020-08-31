@@ -6,7 +6,7 @@ SELECT * FROM OrderDetails;
 SELECT * FROM Products;
 
 -- Tổng giá trị các hóa đơn đã xuất kho trong tháng 8-2004
-SELECT *
+SELECT SUM(od.quantityOrdered * od.priceEach)
 FROM Orders o
 JOIN OrderDetails od ON o.orderNumber = od.orderNumber
 WHERE o.`status`='Shipped' AND o.shippedDate BETWEEN '2004-08-01' AND '2004-08-31';
