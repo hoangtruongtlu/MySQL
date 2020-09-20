@@ -1,6 +1,8 @@
 package Answer_day3;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -10,11 +12,31 @@ public class Main {
 //		Ex1-Ques2
 		Random random = new Random();
 		int a = random.nextInt(99999);
-		DecimalFormat df = new DecimalFormat("00000");
-		System.out.println("Số Random là : " + df.format(a));
+//		DecimalFormat df = new DecimalFormat("00000");
+//		System.out.println("Số Random là : " + df.format(a));
+		addZero(random.nextInt(99999));
 
 //		Ex1-Ques3
 		System.out.println("Hai số cuối là: " + a%100);
+		
+//		Ex2
+		Account[] acc = new Account[5];
+		for (int i = 0; i < acc.length; i++) {
+			acc[i] = new Account();
+			acc[i].email = "Email " + i;
+			acc[i].userName = "User name " + i;
+			acc[i].fullName = "Full name " + i;
+			acc[i].createDate = LocalDate.now();
+		}
+
+		for (int i = 0; i < acc.length; i++) {
+			System.out.println("Email: " + acc[i].email);
+			System.out.println("UserName: " + acc[i].userName);
+			System.out.println("FullName: " + acc[i].email);
+			System.out.println("CreateDate: " + acc[i].createDate);
+			System.out.println();
+			System.out.println();
+		}
 		
 //		Ex4-Ques3
 		Scanner scanner = new Scanner(System.in);		
@@ -31,29 +53,45 @@ public class Main {
 		}
 		
 //		Ex4-Ques15
-		str = " I am developer ";
-		String s = "";
-		for (int i = str.length()-1;i>=0;i--) {
-			s=s+str.charAt(i);
-		}
-		System.out.println(s);
+		reverByWord("  I  am  developer  ");
 		
 //		Ex5-Ques6
-//		String temp;
-//		Department[] departments = new Department[5];
-//		for (int i=0;i<departments.length;i++) {
-//			for(int j=i+1;j<departments.length;j++) {
-//				if(departments[i].name.compareTo(departments[j].name)>0) {
-//					departments[i].name = "Accounting";
-//					departments[i].name = "Boss of director";
-//					departments[i].name = "Marketing";
-//					departments[i].name = "Sale";
-//					departments[i].name = "Waiting room";
-//					temp = departments[i].name;
-//					departments[i].name = departments[j].name;
-//					departments[j].name = temp;
-//				}
-//			}		
-//		}
+		String[] departments = new String[] { "Accounting", "Boss of director", "Marketing", "Sale","Waiting room" };
+		Arrays.sort(departments);
+		for (int i = 0; i < departments.length; i++) {
+			System.out.println("department " + i + " : " + departments[i]);
+	    }
+		
 	}
+		private static void addZero(int number) {
+		int hang = 10000;
+		while (hang >=1) {
+			System.out.print(number/hang);
+			number %=hang;
+			hang/=10;
+			}
+		System.out.println();
+		}
+		
+		private static void reverByWord(String str) {
+			String [] splits = str.split(" ");
+			String[] arr = new String[splits.length];
+			int aindex = 0;
+			for (int i=splits.length-1;i>=0;i--) {
+				if(!"".equals(splits[i])) {
+					arr[aindex] = splits[i];
+					aindex+=1;
+				}
+			}
+			for (int i =0;i<arr.length;i++) {
+				if(arr[i]!=null) {
+					if(arr[i+1]!=null) {
+						System.out.print(arr[i]+ " ");
+					}
+					else {
+						System.out.println(arr[i]);
+					}
+				}
+			}
+		}
 }
