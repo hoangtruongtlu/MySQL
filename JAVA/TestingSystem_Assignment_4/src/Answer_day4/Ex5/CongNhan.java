@@ -10,6 +10,10 @@ public class CongNhan extends CanBo {
 		super(name, age, gender, address);
 		this.level = level;
 	}
+	
+	public CongNhan() {
+		
+	}
 
 	public int getLevel() {
 		return level;
@@ -25,10 +29,7 @@ public class CongNhan extends CanBo {
 		setLevel(sc.nextInt());
 	}
 	public void showInfo() {
-		ArrayList<CongNhan> cn = new ArrayList<>();
-		for (int i = 0; i < cn.size(); i++) {
 			super.showInfo();
 			System.out.println("Bậc:" + getLevel());
-		}
 	}
 }

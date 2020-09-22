@@ -10,6 +10,10 @@ public class NhanVien extends CanBo{
 		super(name, age, gender, address);
 		this.job = job;
 	}
+	
+	public NhanVien() {
+		
+	}
 
 	public String getJob() {
 		return job;
@@ -25,10 +29,7 @@ public class NhanVien extends CanBo{
 		setJob(sc.nextLine());
 	}
 	public void showInfo() {
-		ArrayList<NhanVien> nv = new ArrayList<>();
-		for (int i = 0; i < nv.size(); i++) {
 			super.showInfo();
 			System.out.println("Công việc:" + getJob());
-		}
 	}
 }

@@ -10,6 +10,10 @@ public class KySu extends CanBo {
 		super(name, age, gender, address);
 		this.career = career;
 	}
+	
+	public KySu() {
+		
+	}
 
 	public String getCareer() {
 		return career;
@@ -27,10 +31,7 @@ public class KySu extends CanBo {
 	}
 
 	public void showInfo() {
-		ArrayList<KySu> kysu = new ArrayList<>();
-		for (int i = 0; i < kysu.size(); i++) {
 			super.showInfo();
 			System.out.println("Ngành đào tạo:" + getCareer());
-		}
 	}
 }

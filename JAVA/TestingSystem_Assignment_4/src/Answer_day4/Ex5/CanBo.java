@@ -59,14 +59,13 @@ public class CanBo {
 		setAge(sc.nextInt());
 		System.out.println("Nhập giới tính: ");
 		setGender(sc.nextInt());
+		sc.nextLine();
 		System.out.println("Nhập địa chỉ: ");
 		setAddress(sc.nextLine());
+		
 	}
 	
 	public void showInfo() {
-		ArrayList<CanBo> canbo = new ArrayList<>();
-		for (CanBo cb : canbo) {
-			System.out.println("Tên:" + getName() + "Tuổi:" + getAge() + "Giới tính:" + getGender());
-		}
+		System.out.println("Tên:" + getName() + "\nTuổi:" + getAge() + "\nGiới tính:" + getGender());
 	}
 }
