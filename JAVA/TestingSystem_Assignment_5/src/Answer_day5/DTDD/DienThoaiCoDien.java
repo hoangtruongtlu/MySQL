@@ -1,4 +1,5 @@
-package Answer_day5;
+package Answer_Day5.DTDD;
+
 
 import java.util.Scanner;
 
@@ -14,6 +15,7 @@ public class DienThoaiCoDien extends DTDD implements VuKhi {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Input PhoneNumber: ");
 		String phonenumber = sc.nextLine();
+		System.out.println("Đang gọi " + phonenumber);
 	}
 	
 	@Override
@@ -37,6 +39,6 @@ public class DienThoaiCoDien extends DTDD implements VuKhi {
 
 	@Override
 	public void TanCongKeXau() {
-		System.out.println("Giết nó");	
+		System.out.println("Tấn công bằng điện thoại cổ điển");	
 	}
 }

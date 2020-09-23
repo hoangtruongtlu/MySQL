@@ -1,4 +1,5 @@
-package Answer_day5;
+package Answer_Day5.DTDD;
+
 
 import java.util.Scanner;
 
@@ -14,6 +15,7 @@ public class DienThoaiThongMinh extends DTDD implements VuKhi {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Nhập số điện thoại để gọi: ");
 		String phonenumber = sc.nextLine();
+		System.out.println("Đang gọi" + phonenumber);
 	}
 	
 	@Override
@@ -33,7 +35,14 @@ public class DienThoaiThongMinh extends DTDD implements VuKhi {
 	}
 	
 	public void suDung3G() {
-		System.out.println("Turn On 3G");
+		Scanner sc = new Scanner(System.in);
+		int a = sc.nextInt();
+		if (a==0) {
+			System.out.println("Đang sử dụng 3G");
+		}
+		else {
+			System.out.println("Đang tắt 3G");
+		}
 	}
 	
 	public void chupHinh() {
@@ -42,6 +51,7 @@ public class DienThoaiThongMinh extends DTDD implements VuKhi {
 
 	@Override
 	public void TanCongKeXau() {
-		System.out.println("Tấn công nó bằng điện thoại");	
+		System.out.println("Tấn công bằng điện thoại thông minh");	
 	}
+	
 }

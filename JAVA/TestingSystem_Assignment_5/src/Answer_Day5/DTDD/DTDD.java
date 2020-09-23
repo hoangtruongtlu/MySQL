@@ -1,4 +1,5 @@
-package Answer_day5;
+package Answer_Day5.DTDD;
+
 
 public abstract class DTDD {
 	public abstract void nghe();
