@@ -62,7 +62,6 @@ public class CanBo {
 		sc.nextLine();
 		System.out.println("Nhập địa chỉ: ");
 		setAddress(sc.nextLine());
-		
 	}
 	
 	public void showInfo() {

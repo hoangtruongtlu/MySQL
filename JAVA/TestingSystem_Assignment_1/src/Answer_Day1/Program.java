@@ -93,5 +93,5 @@ public class Program {
 		System.out.println("Posiion Name: " + account1.position.name);
 		System.out.println("Create Date: " + account1.createdate);
 		System.out.println("Group: " + account1.groups[1].name);
-	}		
+	}
 }
