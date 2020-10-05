@@ -26,25 +26,13 @@ public class Program1 {
 		a.getPositon();
 		
 		//Ques3
-		System.out.println("Nhập tên: ");
-		String name = sc.nextLine();
-		a.insertPosition(name);
+		a.insertPosition();
 		
 		//Ques4
-		System.out.println("Nhập positionID: ");
-		int id = sc.nextInt();
-		sc.nextLine();
-		System.out.println("Nhập positionName: ");
-		name = sc.nextLine();
-		a.updatePosition(id,name);
-		a.getPositon();
-		
+		a.updatePosition();
+	
 //		Ques5
-		System.out.println("Nhập ID: ");
-		id = sc.nextInt();
-		sc.nextLine();
-		a.deletePosition(id);
-		
+		a.deletePosition();	
 	}
 
 }

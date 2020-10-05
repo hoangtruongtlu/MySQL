@@ -18,7 +18,9 @@ public class Basic {
 	private ResultSet result;
 	private Properties properties;
 	private int effectedRow;
-
+	PreparedStatement preStatement;
+	Scanner sc = new Scanner(System.in);
+	
 	public Basic() throws FileNotFoundException, IOException {
 		properties = new Properties();
 		properties.load(new FileInputStream("src/backend/ConfigDatabase.properties"));
@@ -41,21 +43,35 @@ public class Basic {
 		}
 	}
 
-	public void insertPosition(String name) throws SQLException {
-		String insert = "Insert into position (positionName) values('" + name + "')";
-		statement = myCon.createStatement();
-		effectedRow = statement.executeUpdate(insert);
+//	public void insertPosition(String name) throws SQLException {
+//		String insert = "Insert into position (positionName) values('" + name + "')";
+//		statement = myCon.createStatement();
+//		effectedRow = statement.executeUpdate(insert);
+//	}
+
+	public void insertPosition() throws SQLException {
+		String insert = "Insert into position (positionName) values(?)";
+		preStatement = myCon.prepareStatement(insert);
+		String posName = sc.nextLine();
+		preStatement.setString(1, posName);
+		preStatement.executeUpdate();
 	}
 
-	public void updatePosition(int positionID, String positionName) throws SQLException {
-		String update = "Update position SET positionName = '" + positionName + "' WHERE positionID = " + positionID;
-		statement = myCon.createStatement();
-		effectedRow = statement.executeUpdate(update);
+	public void updatePosition() throws SQLException {
+		String update = "Update position SET positionName = ? WHERE positionID =  ?";
+		preStatement = myCon.prepareStatement(update);
+		String posName = sc.nextLine();
+		int posId = sc.nextInt();
+		preStatement.setString(1, posName);
+		preStatement.setInt(2, posId);
+		preStatement.executeUpdate();
 	}
 
-	public void deletePosition(int positionID) throws SQLException {
-		String delete = "Delete from position where positionID =" + positionID;
-		statement = myCon.createStatement();
-		effectedRow = statement.executeUpdate(delete);
+	public void deletePosition() throws SQLException {
+		String delete = "Delete from position where positionID = ?";
+		preStatement = myCon.prepareStatement(delete);
+		int posID = sc.nextInt();
+		preStatement.setInt(1, posID);
+		preStatement.executeUpdate();
 	}
 }

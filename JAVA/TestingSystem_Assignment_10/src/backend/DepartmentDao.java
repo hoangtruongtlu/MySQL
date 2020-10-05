@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import entity.Department;
 
 public class DepartmentDao {
-		public List<Department> getDepartment(){
+		
+		public List<Department> getDepartments(){
 			List<Department> departments = new ArrayList<>();
+			
 			return departments;
 		}
 }
