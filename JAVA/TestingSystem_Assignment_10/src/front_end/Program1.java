@@ -19,16 +19,16 @@ public class Program1 {
 		Scanner sc = new Scanner(System.in);
 		
 		Basic a = new Basic();
-		//Ques1
+//		Ques1
 		a.getConnection();
 		
-		//Ques2
+//		Ques2
 		a.getPositon();
 		
-		//Ques3
+//		Ques3
 		a.insertPosition();
 		
-		//Ques4
+//		Ques4
 		a.updatePosition();
 	
 //		Ques5
