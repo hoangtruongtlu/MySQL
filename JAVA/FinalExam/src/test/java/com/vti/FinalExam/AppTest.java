@@ -1,4 +1,4 @@
-package com.vti.FinalTest;
+package com.vti.FinalExam;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

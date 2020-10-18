@@ -35,17 +35,25 @@ create table project(
 
 insert into manager(FullName,Email,Pass,ExpInYear)
 values
-			('Hoang Van Truong','hoangtruong@gmail.com','Truong97',5);
-insert into manager(FullName,Email,Pass,ExpInYear)
-values
-			('Hoang Van trung','hoangtrung@gmail.com','Truong97',5);
+			('Hoang Van Truong','hoangtruong@gmail.com','Truong97',5),
+			('Hoang Van Trung','hoangtrung@gmail.com','Truong97',5);
 insert into employee(FullName,Email,Pass,ProjectID,ProSkill)
 values
-			('Hoang Van Truong','hoangtruong@gmail.com','Truong97',1,'Dev');
+			('Hoang Thi Linh','hoanglinh@gmail.com','Linh93',1,'Dev');
+insert into employee(FullName,Email,Pass,ProjectID,ProSkill)
+values
+			('Tran Van Son','vanson@gmail.com','Son99',1,'Dev');
 insert into project(TeamSize,ManagerID,EmployeeID)
 values
 			(50,1,1);
-select * from project
-		join manager on project.ManagerID = manager.ManagerID
-		join employee on project.employeeID = employee.employeeID
-	where projectID=1;
+insert into project(TeamSize,ManagerID,EmployeeID)
+values
+			(50,2,2);
+insert into project(TeamSize,ManagerID,EmployeeID)
+values
+			(50,2,2);
+select manager.* from project
+		join manager on project.ManagerID = manager.ManagerID;
+select * from employee;
+select * from project;
+select * from manager;

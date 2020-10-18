@@ -3,16 +3,13 @@ package backend.service;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
-
-import Utils.ScannerUtils;
 import backend.reponsitory.IUserReponsitory;
 import backend.reponsitory.UserReponsitory;
 import entity.Manager;
 import entity.Project;
+import utils.ScannerUtils;
 
 public class UserService implements IUserService {
 	private IUserReponsitory reponsitory;
@@ -81,7 +78,7 @@ public class UserService implements IUserService {
 			if (chuanHoaEmail(email)) {
 				check = true;
 			} else {
-				System.out.println("Email nhập chưa đúng định dạng. Mời bạn nhập lại!");
+				System.out.println("Email nhập chưa đúng định dạng. Mời bạn nhập lại!!");
 				email = ScannerUtils.inputString("Mời bạn nhập!");
 			}
 		}
@@ -91,7 +88,7 @@ public class UserService implements IUserService {
 				check = true;
 			} else {
 				System.out.println("Pass nhập từ 6 tới 12 ký tự, có ít nhất 1 ký tự viết hoa. Nhap lai!");
-				pass = ScannerUtils.inputString("Vui long nhap!");
+				pass = ScannerUtils.inputString("Vui lòng nhập!");
 			}
 		}
 

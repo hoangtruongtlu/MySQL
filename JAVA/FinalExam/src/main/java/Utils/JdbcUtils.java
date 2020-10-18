@@ -1,4 +1,4 @@
-package Utils;
+package utils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import Utils.properties.DatabaseProperties;
+import utils.properties.DatabaseProperties;
 
 public class JdbcUtils {
 	private Connection connection;
@@ -20,7 +20,7 @@ public class JdbcUtils {
 		String url = databaseProperties.getProperty("dbURL");
 		String user = databaseProperties.getProperty("user");
 		String password = databaseProperties.getProperty("password");
-		connection = DriverManager.getConnection(url,user,password);
+		connection = DriverManager.getConnection(url, user, password);
 		return connection;
 	}
 	

@@ -48,6 +48,6 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "ID: " + projectID + " Size: " + teamSize + " ManagerID: " + idManager + " EmployeeID: " + idEmployee + "\n";
+		return /*"ID: " + projectID + " Size: " + teamSize + */"ManagerID: " + idManager + " EmployeeID: " + idEmployee + "\n";
 	}
 }

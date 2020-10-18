@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utils.JdbcUtils;
+import utils.JdbcUtils;
 import entity.Manager;
 import entity.Project;
 
@@ -22,29 +22,31 @@ public class UserReponsitory implements IUserReponsitory {
 	}
 
 	public boolean isManagerExists(String email, String pass) throws SQLException {
-		boolean check = false;
 		Connection connection = jdbcUtils.connect();
 		String sql = "select * from manager where email = ? and pass = ?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.setString(1, "email");
-		preparedStatement.setString(2, "pass");
+		preparedStatement.setString(1,email);
+		preparedStatement.setString(2,pass);
 		ResultSet result = preparedStatement.executeQuery();
+		boolean check = false;
 		if (result.next())
 			check = true;
+		
 		jdbcUtils.disconnect();
 		return check;
 	}
 
 	public boolean isEmployeeExists(String email, String pass) throws SQLException {
-		boolean check = false;
 		Connection connection = jdbcUtils.connect();
 		String sql = "select * from employee where email = ? and pass = ?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.setString(1, "email");
-		preparedStatement.setString(2, "pass");
+		preparedStatement.setString(1,email);
+		preparedStatement.setString(2,pass);
 		ResultSet result = preparedStatement.executeQuery();
+		boolean check = false;
 		if (result.next())
 			check = true;
+		
 		jdbcUtils.disconnect();
 		return check;
 	}
@@ -55,12 +57,12 @@ public class UserReponsitory implements IUserReponsitory {
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setInt(1, projectID);
 		ResultSet result = preparedStatement.executeQuery();
+		boolean check = false;
 		if (result.next()) {
-			jdbcUtils.disconnect();
-			return true;
+			check = true;
 		}
 		jdbcUtils.disconnect();
-		return false;
+		return check;
 	}
 
 	public List<Project> showUserInProject(int projectID) throws SQLException {
