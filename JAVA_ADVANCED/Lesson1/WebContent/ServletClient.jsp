@@ -7,15 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="RequestPage.jsp"> 
+	<form action="FirstDemo" method = "get"> 
 		<input type="text" name="fullname"> <input type="submit" value="send"> 
 	</form>
-	
-	
-	<% String name = config.getInitParameter("fullname");
-		out.print(name);	
-		String age = application.getInitParameter("age");
-		out.print(age);
-	%>
+
 </body>
 </html>

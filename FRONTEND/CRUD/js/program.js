@@ -2,12 +2,13 @@ $(function() {
     $(".header").load("header.html");
     $(".main").load("main.html"); 
     $(".footer").load("footer.html"); 
-    // $(".main").load("home.html"); 
-    // showData();
+    $(".main").load("home.html"); 
+    showData();
 });
 
 function clickNavHome(){
     $(".main").load("home.html");
+    showData();
 }
 
 function clickNavViewList(){
@@ -146,27 +147,27 @@ function deleteEmployee(id){
     employees.splice(index,1);
 }
 
-// function showData(){
-//         $.get("https://5f8d9c4c4c15c40016a1df3f.mockapi.io/employees",function(data,status){
-//                 employees = [];
-//                 parseData(data);
-//                 fillStudentIntoTable();
-//         });
+function showData(){
+        $.get("https://5f8d9c4c4c15c40016a1df3f.mockapi.io/employees",function(data,status){
+                employees = [];
+                parseData(data);
+                fillStudentIntoTable();
+        });
 
-//         function parseData(data){
-//             data.forEach(function(item) {
-//                 employees.push(new Employee(item.name,item.department,item.phone));
-//             });
-//         }
-//         function fillStudentIntoTable(){
-//             employees.forEach(function(item){
-//                 $("tbody").append(
-//                     "<tr id =\"" + item.id+"\">"+
-//                         "<td>"+item.name+"</td>" +
-//                         "<td>"+item.department+"</td>" +
-//                         "<td>"+item.phone+"</td>"+
-//                     "</tr>"
-//                 )
-//             })
-//         }
-// }
+        function parseData(data){
+            data.forEach(function(item) {
+                employees.push(new Employee(item.name,item.department,item.phone));
+            });
+        }
+        function fillStudentIntoTable(){
+            employees.forEach(function(item){
+                $("tbody").append(
+                    "<tr id =\"" + item.id+"\">"+
+                        "<td>"+item.name+"</td>" +
+                        "<td>"+item.department+"</td>" +
+                        "<td>"+item.phone+"</td>"+
+                    "</tr>"
+                )
+            })
+        }
+}
