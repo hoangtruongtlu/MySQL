@@ -145,6 +145,7 @@ function openConfirmDelete(id){
 function deleteEmployee(id){
     var index = employees.findIndex(x => x.id==id);
     employees.splice(index,1);
+    
 }
 
 function showData(){

@@ -11,6 +11,16 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+  <filter>
+  	<filter-name>logFilter</filter-name>
+  	<filter-class>com.vti.LogFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>logFilter</filter-name>
+  	<url-pattern>/abc</url-pattern>
+  </filter-mapping>
+  
   <error-page>
   	<exception-type>java.lang.ArithmeticException</exception-type>
   	<location>/Error.jsp</location>

@@ -9,5 +9,7 @@
 <body>
 	<h1>Home Page</h1>
 	<p> <%= request.getParameter("username")%></p>
+	<a href="LogOut">Logout</a>
+	<a href="HomePage"></a>
 </body>
 </html>
