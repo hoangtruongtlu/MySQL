@@ -28,28 +28,28 @@ public class Program {
 		Department DepartmentByName = repository.getDepartmentByName("VTI Sale 02");
 		System.out.println(DepartmentByName);
 
-//		System.out.println("\n\n***********CREATE Department***********");
-//
-//		Department DepartmentCreate = new Department();
-//		DepartmentCreate.setName("waiting");
-//		repository.createDepartment(DepartmentCreate);
-//
-//		System.out.println("\n\n***********UPDATE Department 1***********");
-//
-//		repository.updateDepartment((short) 3, "Security");
-//
-//		System.out.println("\n\n***********UPDATE Department 2***********");
-//
-//		Department DepartmentUpdate = new Department();
-//		DepartmentUpdate.setId((short) 2);
-//		DepartmentUpdate.setName("Security2");
-//		repository.updateDepartment(DepartmentUpdate);
-//
-//		System.out.println("\n\n***********DELETE DepartmentS***********");
-//		repository.deleteDepartment((short) 2);
+		System.out.println("\n\n***********CREATE Department***********");
+
+		Department DepartmentCreate = new Department();
+		DepartmentCreate.setDepartmentName("waiting");
+		repository.createDepartment(DepartmentCreate);
+
+		System.out.println("\n\n***********UPDATE Department 1***********");
+
+		repository.updateDepartment((short) 3, "Security");
+
+		System.out.println("\n\n***********UPDATE Department 2***********");
+
+		Department DepartmentUpdate = new Department();
+		DepartmentUpdate.setDepartmentID((short) 2);
+		DepartmentUpdate.setDepartmentName("Security2");
+		repository.updateDepartment(DepartmentUpdate);
+
+		System.out.println("\n\n***********DELETE Department***********");
+		repository.deleteDepartment((short) 2);
 
 		System.out.println("***********CHECK Department EXISTS BY ID***********");
-		System.out.println(repository.isDepartmentExistsByID((short) 14));
+		System.out.println(repository.isDepartmentExistsByID((short) 2));
 
 		System.out.println("***********CHECK Department EXISTS BY NAME***********");
 		System.out.println(repository.isDepartmentExistsByName("Security"));

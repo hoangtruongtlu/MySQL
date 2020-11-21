@@ -2,18 +2,67 @@ package com.vti.repository;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.vti.entity.Department;
 import com.vti.utils.HibernateUtils;
 
-public class DepartmentRepository {
+@Repository
+public class DepartmentRepository implements IDepartmentRepository {
 
 	private HibernateUtils hibernateUtils;
 
 	public DepartmentRepository() {
 		hibernateUtils = HibernateUtils.getInstance();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Department> getAllDepartments(int page, int size, String sortType, String sortField, String search,
+			short from, short to) {
+
+		Session session = null;
+
+		try {
+			session = hibernateUtils.openSession();
+//			Query<Department> query = session.createQuery("FROM Department");
+			Criteria criteria = session.createCriteria(Department.class);
+			// paging
+			criteria.setFirstResult((page - 1) * size);
+			criteria.setMaxResults(size);
+			// sorting
+			if (sortType.equals("ASC")) {
+				criteria.addOrder(Order.asc(sortField));
+			} else {
+				criteria.addOrder(Order.desc(sortField));
+			}
+			// search
+			if (search != null) {
+				criteria.add(Restrictions.ilike("name", "%" + search + "%"));
+			}
+
+			if (from != -1 && to != -1) {
+				from = (short) (from - 1);
+				to = (short) (to + 1);
+				Criterion idFrom = Restrictions.gt("id", from);
+				Criterion idTo = Restrictions.lt("id", to);
+
+				LogicalExpression filterID = Restrictions.and(idFrom, idTo);
+				criteria.add(filterID);
+			}
+			return criteria.list();
+
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -70,7 +119,7 @@ public class DepartmentRepository {
 			session = hibernateUtils.openSession();
 
 			// create hql query
-			Query<Department> query = session.createQuery("FROM Department WHERE departmentName = :nameParameter");
+			Query<Department> query = session.createQuery("FROM Department WHERE name = :nameParameter");
 
 			// set parameter
 			query.setParameter("nameParameter", name);
@@ -122,7 +171,7 @@ public class DepartmentRepository {
 			Department department = (Department) session.load(Department.class, id);
 
 			// update
-			department.setDepartmentName(newName);
+			department.setName(newName);
 
 			session.getTransaction().commit();
 

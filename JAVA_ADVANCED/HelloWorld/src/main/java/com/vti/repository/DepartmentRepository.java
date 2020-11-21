@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.vti.entity.Department;
 import com.vti.utils.HibernateUtils;
 
-public class DepartmentRepository {
+@Repository
+public class DepartmentRepository implements IDepartmentRepository{
 
 	private HibernateUtils hibernateUtils;
 

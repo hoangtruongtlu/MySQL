@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "`department`", catalog = "TestingSystem")
@@ -22,7 +22,6 @@ public class Department implements Serializable {
 	private short departmentID;
 
 	@Column(name = "DepartmentName", length = 30, nullable = false, unique = false, updatable = true)
-	@Size(min = 6, max = 20, message = "Ten tu 6-20 ky tu")
 	private String departmentName;
 
 	public Department() {
