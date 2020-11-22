@@ -24,8 +24,7 @@ public class GroupRepository implements IGroupRepository {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Group> getAllgroups(int page, int size, String sortType, String sortField, String search, short from,
-			short to) {
+	public List<Group> getAllgroups(int page, int size, String sortType, String sortField, String search) {
 		Session session = null;
 
 		try {
@@ -48,15 +47,6 @@ public class GroupRepository implements IGroupRepository {
 				criteria.add(Restrictions.ilike("groupName", "%" + search + "%"));
 			}
 
-			if (from != -1 && to != -1) {
-				from = (short) (from - 1);
-				to = (short) (to + 1);
-				Criterion idFrom = Restrictions.gt("groupId", from);
-				Criterion idTo = Restrictions.lt("groupId", to);
-
-				LogicalExpression filterID = Restrictions.and(idFrom, idTo);
-				criteria.add(filterID);
-			}
 			return criteria.list();
 
 		} finally {

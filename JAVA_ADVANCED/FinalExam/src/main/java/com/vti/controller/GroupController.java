@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vti.entity.Group;
 import com.vti.service.IGroupService;
 
-@RestController // Đầu ra là trang api dạng text kiểu json
+@RestController
 @RequestMapping(value = "api/v1/groups")
 @CrossOrigin(origins = "http://127.0.0.1:5501")
-@Controller // Đầu ra là tên 1 trang jsp
+@Controller
 public class GroupController {
 
 	@Autowired
@@ -30,10 +30,9 @@ public class GroupController {
 	@GetMapping()
 	public List<Group> getAllgroups(@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "ASC") String sortType,
-			@RequestParam(defaultValue = "id") String sortField, @RequestParam String search,
-			@RequestParam(defaultValue = "-1") short from, @RequestParam(defaultValue = "-1") short to) {
+			@RequestParam(defaultValue = "id") String sortField, @RequestParam String search) {
 
-		return service.getAllgroups(page, size, sortType, sortField, search, from, to);
+		return service.getAllgroups(page, size, sortType, sortField, search);
 	}
 
 	@GetMapping(value = "/{id}")

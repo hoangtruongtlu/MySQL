@@ -20,5 +20,8 @@ VALUE 				(N'Testing System'		,   5			,	'NAT'			,	'2019-03-05'),
                     (N'VTI Marketing 01'	,   7			,	'NAT'			,	'2020-04-07'),
                     (N'Management'			,   8			,	'NAT'			,	'2020-04-08'),
                     (N'Chat with love'		,   9			,	'NAT'			,	'2020-04-09'),
+                    (N'JAVA CORE'			,   3			,	'NAT'			,		now()	),
+                    (N'Angular'				,   4			,	'NAT'			,		now()	),
+                    (N'MySQL'				,   5			,	'NAT'			,		now()	),
                     (N'Vi Ti Ai'			,   10			,	'NAT'			,	'2020-04-10');
 select * from `group`

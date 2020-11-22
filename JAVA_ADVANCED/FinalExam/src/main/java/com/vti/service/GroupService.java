@@ -15,10 +15,9 @@ public class GroupService implements IGroupService {
 	private IGroupRepository repository;
 
 	@Override
-	public List<Group> getAllgroups(int page, int size, String sortType, String sortField, String search, short from,
-			short to) {
+	public List<Group> getAllgroups(int page, int size, String sortType, String sortField, String search) {
 
-		return repository.getAllgroups(page, size, sortType, sortField, search, from, to);
+		return repository.getAllgroups(page, size, sortType, sortField, search);
 	}
 
 	@Override

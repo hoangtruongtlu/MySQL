@@ -17,23 +17,15 @@ var page = 1;
     type = "";
     field = "";
     keyword = "";
-    from = -1 ;
-    to = -1;
 
 function initGroups(){
     //init data
     $.get("http://localhost:8080/api/v1/groups?page=" + page + "&size=" + size+ "&sortType=" + type
-    + "&sortField=" + field + "&search=" + keyword + "&from=" + from+ "&to=" + to, function(data,status){
+    + "&sortField=" + field + "&search=" + keyword, function(data,status){
         
         // reset list groups
         groups = [];
 
-        // error
-        // if (status == "error") {
-        //     // TODO
-        //     alert("Error when loading data");
-        //     return;
-        // }
         $('tbody').empty();
         // success
         parseData(data);
@@ -43,7 +35,6 @@ function initGroups(){
 
 function parseData(data) {
     groups = [];
-    console.log(data);
     data.forEach(function(item) {
         groups.push(new Group(item.groupId, item.groupName, item.totalMember, item.creator, item.createDate));
     });
@@ -84,20 +75,6 @@ function builtTable() {
     initGroups();
 }
 
-function builtTableNull(){
-    setTimeout(function name(params){
-        $('tbody').empty();
-        $('tbody').append(
-        '<tr style="background-color: lightgray;">'+
-            '<td><input type="checkbox" name="idGroup"></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-        '</tr>');
-    }, 300)
-}
 
 function openAddModal(){
     resetForm();
@@ -121,72 +98,99 @@ function hideModal(){
 function convertExpandedDateToDate(exDate){
     var date = new Date(exDate);
     var dd = exDate.slice(8,10);
-    var mm = date.getMonth()+1;      //As January is 0.
+    var mm = date.getMonth()+1;
     var yyyy = date.getFullYear();
 
     if(mm<10) mm='0'+mm;
     return dd+'/'+mm+'/'+yyyy;
 }
 
-function convertDateToExpandedDate(date){
-    // var date = new Date(date1);
-    var dd = date.getDate();
-    var mm = date.getMonth()+1;      //As January is 0.
-    var yyyy = date.getFullYear();
-    var HH = date.getHours();
-    var MM = date.getMinutes();
-    var SS = date.getSeconds();
-    var MLS = date.getMilliseconds();
 
-    if(dd<10) dd='0'+dd;
-    if(mm<10) mm='0'+mm;
-    if(HH<10) HH='0'+HH;
-    if(MM<10) MM='0'+MM;
-    if(SS<10) SS='0'+SS;
-    if(MLS<10) MLS='00'+MLS
-    else if(MLS<100) MLS='0'+MLS;
+// function addGroup(){
+//     var name = document.getElementById("name").value;
+//     var member = document.getElementById("member").value;
+//     var creator = document.getElementById("creator").value;
+//     if(name != "" && member != "" && creator != ""){
+//         if(checkNameGroup(name)){
+//             if(member>=0){
+//                 var today = new Date();
 
-    return yyyy+'-'+mm+'-'+dd+'T'+HH+':'+MM+':'+SS+'.'+MLS+'Z';
-}
+//                 var group = {
+//                     name: name,
+//                     member: member,
+//                     creator: creator,
+//                     createDate: convertDateToExpandedDate(today),
+//                 };
+            
+//                 $.post("http://localhost:8080/api/v1/groups", group,
+//                     function(data, status) {
+//                         // error
+//                         if (status == "error") {
+//                             alert("Error when loading data");
+//                             return;
+//                         }
+            
+//                         // success
+//                         hideModal();
+//                         showSuccessAlert();
+//                         builtTable();
+//                     });
+//             }
+//             else alert("Member: Cannot enter negative numbers!");
+//         }
+//         else{
+//             alert("Group name is exists. Enter another name!");
+//         }
+//     }
+//     else{
+//         alert("Please fill out the form");
+//     }
+// }
 
-function addGroup(){
+function addGroup() {
+
+    // get data
     var name = document.getElementById("name").value;
     var member = document.getElementById("member").value;
     var creator = document.getElementById("creator").value;
-    if(name != "" && member != "" && creator != ""){
-        if(checkNameGroup(name)){
-            if(member>=0){
-                var today = new Date();
 
-                var group = {
-                    name: name,
-                    member: member,
-                    creator: creator,
-                    createDate: convertDateToExpandedDate(today),
-                };
-            
-                $.post("", group,
-                    function(data, status) {
-                        // error
-                        if (status == "error") {
-                            alert("Error when loading data");
-                            return;
-                        }
-            
-                        // success
-                        hideModal();
-                        showSuccessAlert();
-                        builtTable();
-                    });
-            }
-            else alert("Member: Cannot enter negative numbers!");
+    // TODO validate
+    // then fail validate ==> return;
+    // var today = new Date();
+
+    var group = {
+        name: name,
+        member: member,
+        creator: creator,
+        // createDate: convertDateToExpandedDate(today),
+    };
+
+    $.ajax({
+        url: 'http://localhost:8080/api/v1/groups',
+        type: 'POST',
+        data: JSON.stringify(group), // body
+        contentType: "application/json", // type of body (json, xml, text)
+        // dataType: 'json', // datatype return
+        success: function(data, textStatus, xhr) {
+            hideModal();
+            showSuccessAlert();
+            buildTable();
+        },
+        error(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
         }
-        else{
-            alert("Group name is exists. Enter another name!");
-        }
-    }
-    else{
-        alert("Please fill out the form");
+    });
+}
+
+function save() {
+    var id = document.getElementById("id").value;
+    console.log(id);
+    if (id == null || id == "") {
+        addGroup();
+    }else {
+        updateGroup();
     }
 }
 
@@ -232,7 +236,7 @@ function deleteGroup(ids){
         var id = ids[i];
         $.ajax({
             
-            url: "" + id,
+            url: "http://localhost:8080/api/v1/groups/" + id,
             type: 'DELETE',
             success: function(result) {
                 // error
@@ -247,19 +251,8 @@ function deleteGroup(ids){
             }
         });
     }
-
-
-        // var index = groups.findIndex(x => x.id == result[i]);
-        // groups.splice(index,1);
 }
-    // showDeleteAlert();
-    // if(countGroup > 0){
-        // builtTable();
-    // }
-    // else{
-    //     builtTableNull();
-    // }
-// }
+
 
 function showSuccessAlert(){
     $("#alert-success").fadeTo(2000,500).slideUp(500, function(){
@@ -271,4 +264,90 @@ function showDeleteAlert(){
     $("#alert-danger").fadeTo(2000,500).slideUp(500, function(){
         $("#alert-danger").slideUp(500);
     });
+}
+
+function nextPage(){
+    page++;
+    resetForm();
+    initGroups();
+}
+
+function prePage(){
+    if(page>1)
+    page--;
+    resetForm();
+    initGroups();
+}
+
+function sortASC(){
+    type = "ASC";
+    resetForm();
+    initGroups();
+}
+
+function sortDESC(){
+    type = "DESC";
+    resetForm();
+    initGroups();
+}
+
+function sortNameASC(){
+    type = "ASC";
+    field="groupName";
+    resetForm();
+    initGroups();
+}
+
+function sortNameDESC(){
+    type = "DESC";
+    field="groupName";
+    resetForm();
+    initGroups();
+}
+
+function sortMemASC(){
+    type = "ASC";
+    field="totalMember";
+    resetForm();
+    initGroups();
+}
+
+function sortMemDESC(){
+    type = "DESC";
+    field="totalMember";
+    resetForm();
+    initGroups();
+}
+
+function sortCreateASC(){
+    type = "ASC";
+    field="creator";
+    resetForm();
+    initGroups();
+}
+
+function sortCreateDESC(){
+    type = "DESC";
+    field="creator";
+    resetForm();
+    initGroups();
+}
+function sortDateASC(){
+    type = "ASC";
+    field="createDate";
+    resetForm();
+    initGroups();
+}
+
+function sortDateDESC(){
+    type = "DESC";
+    field="createDate";
+    resetForm();
+    initGroups();
+}
+
+function search(){
+    keyword = $("#search").val();
+    resetForm();
+    initGroups();
 }
